@@ -12,7 +12,11 @@
   "author": "lunaceee",
   "license": "ISC",
   "dependencies": {
+    "@sanity/block-content-to-react": "2.0.7",
+    "@sanity/client": "2.1.0",
+    "@sanity/image-url": "0.140.19",
     "autoprefixer": "10.1.0",
+    "groq": "2.0.9",
     "next": "^10.0.3",
     "postcss": "8.2.1",
     "react": "^17.0.1",
