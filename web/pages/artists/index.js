@@ -1,41 +1,44 @@
-import groq from "groq";
-import Artist from "../../components/Artist";
-import client from "../../client";
+import getSanityContent from "../../utils/sanity";
+import Layout from "../../components/Layout";
 
-const Index = (props) => {
-  const { artists = [] } = props;
+export default function Index({ artists }) {
+  console.log({ artists });
   return (
-    <div>
+    <Layout {...artists}>
       <h2>Featured artists</h2>
       <ul className="max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-        {artists &&
-          artists.map((artist) => {
-            return (
-              <li key={artist.name}>
-                <Artist {...artist} />
-              </li>
-            );
-          })}{" "}
+        {artists.map((artist) => {
+          return (
+            <li key={artist.slug}>
+              <h3>{artist.title}</h3>
+            </li>
+          );
+        })}
       </ul>
-    </div>
+    </Layout>
   );
-};
+}
 
-Index.getInitialProps = async () => {
-  const query = {
-    artists: await client.fetch(groq`
-      *[_type == "artist"]{
-        name,
-        "imageUrl": image.asset->url, 
-        "latestCollection": *[ _type == "collection" && references(^._id)] | order(_updatedAt asc)[0]{
-          title, 
-          description,
-          "thumbnailUrl": thumbnail.asset->url,
+export async function getStaticProps() {
+  const data = await getSanityContent({
+    query: `
+      query allArtists {
+        allArtist {
+          name
+          slug {
+            current
+          }
         }
       }
-    `),
-  };
-  return query;
-};
+    `,
+  });
 
-export default Index;
+  const artists = data.allArtist.map((artist) => ({
+    title: artist.name,
+    slug: artist.slug.current,
+  }));
+
+  return {
+    props: { artists },
+  };
+}

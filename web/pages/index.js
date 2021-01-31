@@ -1,36 +1,43 @@
-// index.js
 import Link from "next/link";
-import groq from "groq";
-import client from "../client";
+import getSanityContent from "../utils/sanity";
 import Layout from "../components/Layout";
 
-const Index = (props) => {
-  const { posts = [] } = props;
+export default function Index({ pages }) {
   return (
-    <Layout
-      title={props.title}
-      description={props.description}
-      className="container mx-auto"
-    >
-      {posts.map(
-        ({ _id, title = "", slug = "", _updatedAt = "" }) =>
-          slug && (
-            <li key={_id}>
-              <Link href="/post/[slug]" as={`/post/${slug.current}`}>
-                <a>{title}</a>
-              </Link>{" "}
-              ({new Date(_updatedAt).toDateString()})
-            </li>
-          )
-      )}
+    <Layout {...pages}>
+      <ul>
+        {pages.map(({ title, slug }) => (
+          <li key={slug}>
+            <Link href={`/${slug}`}>
+              <a>{title}</a>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </Layout>
   );
-};
+}
 
-Index.getInitialProps = async () => ({
-  posts: await client.fetch(groq`
-      *[_type == "post" && publishedAt < now()]|order(publishedAt desc)
-    `),
-});
+export async function getStaticProps() {
+  const data = await getSanityContent({
+    query: `
+      query allPages {
+        allPage {
+          title
+          slug {
+            current
+          }
+        }
+      }
+    `,
+  });
 
-export default Index;
+  const pages = data.allPage.map((page) => ({
+    title: page.title,
+    slug: page.slug.current,
+  }));
+
+  return {
+    props: { pages },
+  };
+}

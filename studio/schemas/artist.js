@@ -64,7 +64,7 @@ export default {
       type: "string",
     },
     {
-      name: "linkedin",
+      name: "linkedIn",
       title: "LinkedIn",
       type: "string",
     },

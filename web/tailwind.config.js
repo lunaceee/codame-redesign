@@ -8,6 +8,7 @@ module.exports = {
     colors: {
       primary500: "#FF02ED",
       red: colors.red,
+      blue: colors.blue,
     },
   },
   variants: {

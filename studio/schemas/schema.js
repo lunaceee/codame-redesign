@@ -13,6 +13,7 @@ import artist from "./artist";
 import event from "./event";
 import project from "./project";
 import collection from "./collection";
+import page from "./page";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -23,6 +24,7 @@ export default createSchema({
   types: schemaTypes.concat([
     // The following are document types which will appear
     // in the studio.
+    page,
     post,
     author,
     category,
