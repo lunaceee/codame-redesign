@@ -1,5 +1,9 @@
+import { serializers } from "@sanity/block-content-to-react/lib/targets/dom";
+import artist from "../../../studio/schemas/artist";
 import Layout from "../../components/Layout";
 import getSanityContent from "../../utils/sanity";
+import sanity from "../../client";
+const BlockContent = require("@sanity/block-content-to-react");
 
 export async function getStaticPaths() {
   const data = await getSanityContent({
@@ -39,6 +43,13 @@ export async function getStaticProps({ params }) {
           instagram
           pinterest
           linkedIn
+          gallery {
+            asset {
+              url
+              title
+            }
+          }
+          bodyRaw
         }
       }
     `,
@@ -67,18 +78,42 @@ const Artist = (props) => {
   const pinterest = artist.pinterest;
   const twitter = artist.twitter;
 
+  const serializers = {
+    types: {
+      artistBio: (props) => <div>{props.node._type}</div>,
+    },
+  };
+
   return (
-    <ul>
-      <li>{name}</li>
-      <li>
+    <article>
+      <h1>{name}</h1>
+      <div>
         <img src={imageUrl} alt={slug} />
-      </li>
-      <li>{facebook}</li>
-      <li>{instagram}</li>
-      <li>{linkedIn}</li>
-      <li>{pinterest}</li>
-      <li>{twitter}</li>
-    </ul>
+      </div>
+      <ul>
+        <li>{facebook}</li>
+        <li>{instagram}</li>
+        <li>{linkedIn}</li>
+        <li>{pinterest}</li>
+        <li>{twitter}</li>
+      </ul>
+      <ul>
+        {artist.gallery.map((image) => (
+          <li key={image.asset.url}>
+            <img
+              src={image.asset.url}
+              alt={image.asset.title || "artist showcase"}
+            />
+          </li>
+        ))}
+      </ul>
+      <BlockContent
+        blocks={artist.bodyRaw}
+        serializers={serializers}
+        dataset={sanity.clientConfig.dataset}
+        projectId={sanity.clientConfig.projectId}
+      />
+    </article>
   );
 };
 
