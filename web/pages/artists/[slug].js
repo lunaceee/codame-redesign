@@ -79,41 +79,56 @@ const Artist = (props) => {
   const twitter = artist.twitter;
 
   const serializers = {
-    types: {
-      artistBio: (props) => <div>{props.node._type}</div>,
+    marks: {
+      link: ({ children, mark }) =>
+        mark.blank ? (
+          <a
+            href={mark.href}
+            target="_blank"
+            rel="noopener noreferer" //security reason
+            className="text-blue-500 underline"
+          >
+            {children}
+          </a>
+        ) : (
+          <a href={mark.href}>{children}</a>
+        ),
     },
   };
 
   return (
-    <article>
-      <h1>{name}</h1>
-      <div>
-        <img src={imageUrl} alt={slug} />
-      </div>
-      <ul>
-        <li>{facebook}</li>
-        <li>{instagram}</li>
-        <li>{linkedIn}</li>
-        <li>{pinterest}</li>
-        <li>{twitter}</li>
-      </ul>
-      <ul>
-        {artist.gallery.map((image) => (
-          <li key={image.asset.url}>
-            <img
-              src={image.asset.url}
-              alt={image.asset.title || "artist showcase"}
-            />
-          </li>
-        ))}
-      </ul>
-      <BlockContent
-        blocks={artist.bodyRaw}
-        serializers={serializers}
-        dataset={sanity.clientConfig.dataset}
-        projectId={sanity.clientConfig.projectId}
-      />
-    </article>
+    <Layout>
+      <article>
+        <h1>{name}</h1>
+        <div>
+          <img src={imageUrl} alt={slug} />
+        </div>
+        <ul>
+          <li>{facebook}</li>
+          <li>{instagram}</li>
+          <li>{linkedIn}</li>
+          <li>{pinterest}</li>
+          <li>{twitter}</li>
+        </ul>
+        <ul>
+          {artist.gallery.map((image) => (
+            <li key={image.asset.url}>
+              <img
+                src={image.asset.url}
+                alt={image.asset.title || "artist showcase"}
+              />
+            </li>
+          ))}
+        </ul>
+        <BlockContent
+          className="artist-bio"
+          blocks={artist.bodyRaw}
+          serializers={serializers}
+          dataset={sanity.clientConfig.dataset}
+          projectId={sanity.clientConfig.projectId}
+        />
+      </article>
+    </Layout>
   );
 };
 
