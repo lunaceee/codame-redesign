@@ -2,7 +2,7 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   purge: [],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {},
     colors: {
@@ -25,6 +25,8 @@ module.exports = {
       secondary900: "#016979",
       gray: colors.gray,
       white: colors.white,
+      purple: colors.purple,
+      pink: colors.pink,
     },
   },
   variants: {

@@ -21,10 +21,27 @@
 @layer base {
   body {
     font-family: "Asap", sans-serif;
+    @apply dark:text-gray-50;
   }
 
   h1 {
     font-family: "Klavika", sans-serif;
-    @apply text-3xl text-primary500;
+    @apply text-4xl;
+  }
+}
+
+.artist-bio {
+  @apply mt-10 px-4 max-w-2xl;
+
+  & h1 {
+    @apply text-center my-4;
+  }
+
+  & p {
+    @apply text-lg leading-7 my-4;
+  }
+
+  & a {
+    @apply text-secondary600;
   }
 }
