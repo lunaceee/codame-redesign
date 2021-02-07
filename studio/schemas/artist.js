@@ -1,3 +1,5 @@
+import gallery from "./gallery";
+
 export default {
   name: "artist",
   title: "Artist",
@@ -7,38 +9,27 @@ export default {
       name: "name",
       title: "Name",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "slug",
       title: "Slug",
       type: "slug",
+      validation: (Rule) => Rule.required(),
       options: {
         source: "name",
         maxLength: 96,
       },
     },
     {
-      name: "image",
-      title: "Image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
+      name: "profile",
+      title: "Profile image",
+      type: "article-image",
     },
     {
-      name: "gallery",
-      title: "Gallery",
-      type: "array",
-      of: [
-        {
-          title: "Image",
-          type: "image",
-          lists: [],
-          options: {
-            hotspot: true,
-          },
-        },
-      ],
+      name: "artistShowcase",
+      title: "Artist showcase",
+      type: "gallery",
     },
     {
       name: "body",
@@ -73,6 +64,11 @@ export default {
     {
       name: "pinterest",
       title: "Pinterest",
+      type: "string",
+    },
+    {
+      name: "youtube",
+      title: "YouTube",
       type: "string",
     },
   ],

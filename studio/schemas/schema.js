@@ -8,12 +8,14 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 import blockContent from "./blockContent";
 import category from "./category";
 import post from "./post";
+import ArticleImage from "./articleImage";
 import author from "./author";
 import artist from "./artist";
 import event from "./event";
 import project from "./project";
 import collection from "./collection";
 import page from "./page";
+import gallery from "./gallery";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -26,7 +28,9 @@ export default createSchema({
     // in the studio.
     page,
     post,
+    ArticleImage,
     author,
+    gallery,
     category,
     artist,
     event,
