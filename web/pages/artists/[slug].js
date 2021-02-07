@@ -26,13 +26,13 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const data = await getSanityContent({
     query: `
-      query AllArtists($slug: String) {
+      query Artist($slug: String) {
         allArtist(where: {slug: {current: {eq: $slug}}}) {
           name
           slug {
             current
           }
-          image {
+          profile {
             asset {
               url
             }
@@ -42,24 +42,22 @@ export async function getStaticProps({ params }) {
           instagram
           pinterest
           linkedIn
-          gallery {
+          artistShowcase {
+            caption
             asset {
               url
-              title
             }
           }
           bodyRaw
         }
-      }
+      }*99
     `,
     variables: {
       slug: params.slug,
     },
   });
 
-  const artist = data.allArtist.map((artist) => {
-    return artist;
-  });
+  const artist = data.allArtist.map((artist) => artist);
 
   return {
     props: { artist },
@@ -68,7 +66,7 @@ export async function getStaticProps({ params }) {
 
 const Artist = (props) => {
   const artist = props.artist[0];
-  const imageUrl = artist.image.asset.url;
+  const imageUrl = artist.profile.asset.url;
   const name = artist.name;
   const slug = artist.slug.current;
   const facebook = artist.facebook;
@@ -113,7 +111,7 @@ const Artist = (props) => {
             <img src={imageUrl} alt={slug} className="h-full w-auto" />
           </div>
           <ul className="flex space-x-2">
-            <li>
+            <li className="hover:text-secondary500 transition duration-200 ease-in-out">
               <a href={website}>
                 <svg
                   fill="currentColor"
@@ -238,31 +236,33 @@ const Artist = (props) => {
             </li>
           </ul>
         </section>
-        <img
-          src={artist.gallery[featuredImageIndex].asset.url}
-          alt="featured image"
-        />
-
-        <ul className="flex flex-col md:flex-row space-x-4 w-3/5 mt-10">
-          {artist.gallery.map((image, index) => {
-            console.log("index", index);
-            console.log("featured index", featuredImageIndex);
+        <div className="hidden md:block max-w-5xl">
+          <img
+            src={artist.artistShowcase[featuredImageIndex].asset.url}
+            alt="featured image"
+          />
+          <p className="text-center italic text-gray-200 mt-2">
+            {artist.artistShowcase[featuredImageIndex].caption}
+          </p>
+        </div>
+        <ul className="grid md:grid-flow-col w-full md:w-2/3 md:grid-rows-2 lg:grid-rows-1 lg:w-2/5 mt-10 gap-4">
+          {artist.artistShowcase.map((image, index) => {
             return (
               <li
                 onClick={handleClickImage}
                 data-image_index={index}
                 key={index}
                 value={index}
-                className={
-                  index == featuredImageIndex
-                    ? "border-2 border-primary600"
-                    : ""
-                }
+                className="flex"
               >
                 <img
-                  className="transition duration-300 ease-in-out"
+                  className={
+                    index == featuredImageIndex
+                      ? "sm:border-2  sm:border-primary600"
+                      : ""
+                  }
                   src={image.asset.url}
-                  alt={image.asset.title || "artist showcase"}
+                  alt={image.caption || "artist showcase"}
                 />
               </li>
             );
