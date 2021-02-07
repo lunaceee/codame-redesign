@@ -50,7 +50,7 @@ export async function getStaticProps({ params }) {
           }
           bodyRaw
         }
-      }*99
+      }
     `,
     variables: {
       slug: params.slug,
