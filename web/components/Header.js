@@ -3,12 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState(false);
-
-  const handleToggleProfile = (e) => {
-    setIsOpen(!isOpen);
-  };
 
   const handleToggleMenuItem = (e) => {
     setIsActive(!isActive);
@@ -16,7 +11,7 @@ const Header = () => {
 
   return (
     <nav className="bg-gray-800 text-white shadow-md">
-      <div className="max-w-8xl mx-auto px-2 py-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-2 py-4 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* <!-- Mobile menu button--> */}
@@ -175,8 +170,8 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              <div className="ml-3 relative">
+            {/*<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+               <div className="ml-3 relative">
                 <div>
                   <button
                     onClick={handleToggleProfile}
@@ -219,9 +214,9 @@ const Header = () => {
                   >
                     Sign out
                   </a>
-                </div>
+                </div> 
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>
