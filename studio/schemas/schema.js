@@ -8,7 +8,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 import blockContent from "./blockContent";
 import category from "./category";
 import post from "./post";
-import ArticleImage from "./articleImage";
+import contentImage from "./contentImage";
 import author from "./author";
 import artist from "./artist";
 import event from "./event";
@@ -28,7 +28,7 @@ export default createSchema({
     // in the studio.
     page,
     post,
-    ArticleImage,
+    contentImage,
     author,
     gallery,
     category,

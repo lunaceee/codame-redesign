@@ -9,7 +9,7 @@ export default {
       name: "name",
       title: "Name",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().max(50),
     },
     {
       name: "slug",
@@ -35,7 +35,7 @@ export default {
     {
       name: "profile",
       title: "Profile image",
-      type: "article-image",
+      type: "image",
     },
     {
       name: "artistShowcase",

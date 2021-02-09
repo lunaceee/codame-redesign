@@ -4,8 +4,7 @@ export default {
   type: "array",
   of: [
     {
-      title: "Article image",
-      type: "article-image",
+      type: "contentImage",
       lists: [],
       options: {
         hotspot: true,

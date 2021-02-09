@@ -1,7 +1,6 @@
 import Layout from "../../components/Layout";
 import getSanityContent from "../../utils/sanity";
 import sanity from "../../client";
-import React, { useState } from "react";
 const BlockContent = require("@sanity/block-content-to-react");
 import serializers from "../../utils/serializers";
 import ArtistSocialIcons from "../../components/ArtistSocialIcons";
@@ -85,18 +84,20 @@ const Artist = (props) => {
           </div>
           <ArtistSocialIcons {...props} />
         </section>
-        <Carousel>
-          {artist.artistShowcase.map((image) => {
-            return (
-              <div>
-                <img
-                  src={image.asset.url}
-                  alt={image.caption || "artist showcase"}
-                />
-              </div>
-            );
-          })}
-        </Carousel>
+        {artist.artistShowcase && (
+          <Carousel>
+            {artist.artistShowcase.map((image) => {
+              return (
+                <div>
+                  <img
+                    src={image.asset.url}
+                    alt={image.caption || "artist showcase"}
+                  />
+                </div>
+              );
+            })}
+          </Carousel>
+        )}
 
         <BlockContent
           className="content-editor"

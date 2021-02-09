@@ -1,4 +1,4 @@
-import { ButtonType, ButtonSize } from "./theme";
+import { ButtonType, ButtonSize } from "./Theme";
 
 function Button({ size, type, children }) {
   // This can be improved. I’m keeping it simple here by joining two strings.

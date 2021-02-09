@@ -30,7 +30,7 @@ export default {
     {
       name: "thumbnail",
       title: "Thumbnail",
-      type: "article-image",
+      type: "contentImage",
     },
     {
       name: "tags",

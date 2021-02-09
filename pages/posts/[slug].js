@@ -1,16 +1,14 @@
 import getSanityContent from "../../utils/sanity";
-
-export default function Post(props) {
-  console.log(props);
-  return <div>{JSON.stringify(props)}</div>;
-}
+import Layout from "../../components/Layout";
+import sanity from "../../client";
+const BlockContent = require("@sanity/block-content-to-react");
+import serializers from "../../utils/serializers";
 
 export async function getStaticPaths() {
   const data = await getSanityContent({
     query: `
       query allPosts {
         allPost {
-          title
           slug {
             current
           }
@@ -30,16 +28,26 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const data = await getSanityContent({
     query: `
-      query PostBySlug($slug: String!) {
-        allPost(filter: {slug: {eq: $slug}) {
+      query PostBySlug($slug: String) {
+        allPost(where: {slug: {current: {eq: $slug}}}){
           title
-          slug {
-            current
-          }
           author {
             name
           }
+          categories {
+            title
+          }
           bodyRaw
+          publishedAt
+          mainImage {
+            asset {
+              url
+            }
+          }
+          slug {
+            current
+          }
+        }
       }
     `,
     variables: {
@@ -47,16 +55,32 @@ export async function getStaticProps({ params }) {
     },
   });
 
-  const [postData] = data.allPost;
-
-  // const content = await renderToString(pageData.content, {
-  //   components: { Callout },
-  // });
+  const post = data.allPost.map((post) => post);
 
   return {
-    props: {
-      title: postData.title,
-      bio: postData.bodyRaw.children.text,
-    },
+    props: { post },
   };
 }
+
+const Post = (props) => {
+  const post = props.post[0];
+
+  return (
+    <Layout>
+      <article>
+        <section>
+          <h1>{post.title}</h1>
+        </section>
+        <BlockContent
+          className="content-editor"
+          blocks={post.bodyRaw}
+          serializers={serializers}
+          dataset={sanity.clientConfig.dataset}
+          projectId={sanity.clientConfig.projectId}
+        />
+      </article>
+    </Layout>
+  );
+};
+
+export default Post;
