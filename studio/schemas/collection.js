@@ -10,9 +10,8 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required(),
       validation: (Rule) =>
-        Rule.max(50).warning("Shorter titles are usually better"),
+        Rule.required().warning("Shorter titles are usually better").max(50),
     },
     {
       name: "slug",
@@ -20,7 +19,6 @@ export default {
       type: "slug",
       options: {
         source: "title",
-        maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
     },
@@ -33,6 +31,18 @@ export default {
       name: "thumbnail",
       title: "Thumbnail",
       type: "article-image",
+    },
+    {
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [
+        {
+          title: "Tag",
+          type: "reference",
+          to: [{ type: "category" }],
+        },
+      ],
     },
     {
       name: "artworkShowcase",

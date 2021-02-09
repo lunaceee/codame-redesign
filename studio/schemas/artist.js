@@ -18,8 +18,19 @@ export default {
       validation: (Rule) => Rule.required(),
       options: {
         source: "name",
-        maxLength: 96,
       },
+    },
+    {
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [
+        {
+          title: "Tag",
+          type: "reference",
+          to: [{ type: "category" }],
+        },
+      ],
     },
     {
       name: "profile",
