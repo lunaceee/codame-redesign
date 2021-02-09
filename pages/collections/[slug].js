@@ -84,7 +84,7 @@ const Collection = (props) => {
         <section className="grid h-80 justify-items-center p-10 items-center">
           <h1 className="p-4">{title}</h1>
         </section>
-        <div className="flex flex-col md:flex-row md:space-x-4">
+        <div className="flex flex-col lg:flex-row lg:space-x-4 lg:mx-8">
           <div className="w-full md:max-w-2xl">
             <Carousel>
               {collection.artworkShowcase.map((artwork) => {
@@ -100,7 +100,10 @@ const Collection = (props) => {
             <div className="flex flex-wrap justify-start space-x-2 my-10">
               {tags.map((tag) => {
                 return (
-                  <div className="rounded-full px-4 py-2 bg-secondary800 max-w-40 w-auto">
+                  <div
+                    className="rounded-full px-4 py-2 bg-secondary800 max-w-40 w-auto"
+                    key={tag.title}
+                  >
                     {tag.title}
                   </div>
                 );
