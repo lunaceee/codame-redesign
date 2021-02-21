@@ -1,43 +1,35 @@
 import Link from "next/link";
-import getSanityContent from "../utils/sanity";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 import Layout from "../components/Layout";
 
-export default function Index({ pages }) {
+export const ALL_PAGES_QUERY = gql`
+  query allPages {
+    allPage {
+      title
+      slug {
+        current
+      }
+    }
+  }
+`;
+
+export default function Home() {
+  const { loading, error, data } = useQuery(ALL_PAGES_QUERY);
+  if (error) return <h1>Error</h1>;
+  if (loading) return <h1>Loading...</h1>;
   return (
-    <Layout {...pages}>
+    <Layout>
       <ul>
-        {pages.map(({ title, slug }) => (
-          <li key={slug}>
-            <Link href={`/${slug}`}>
-              <a>{title}</a>
-            </Link>
-          </li>
-        ))}
+        {data &&
+          data.allPage.map(({ title, slug }) => (
+            <li key={slug}>
+              <Link href={`/${slug}`}>
+                <a>{title}</a>
+              </Link>
+            </li>
+          ))}
       </ul>
     </Layout>
   );
-}
-
-export async function getStaticProps() {
-  const data = await getSanityContent({
-    query: `
-      query allPages {
-        allPage {
-          title
-          slug {
-            current
-          }
-        }
-      }
-    `,
-  });
-
-  const pages = data.allPage.map((page) => ({
-    title: page.title,
-    slug: page.slug.current,
-  }));
-
-  return {
-    props: { pages },
-  };
 }
