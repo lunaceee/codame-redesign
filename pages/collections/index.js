@@ -1,9 +1,36 @@
 // index.js
 import Link from "next/link";
-import getSanityContent from "../../utils/sanity";
 import Layout from "../../components/Layout";
+import client from "../api/client";
+import gql from "graphql-tag";
 
-export default function Index({ collections }) {
+export const ALL_COLLECTIONS_QUERY = gql`
+  query allCollections {
+    allCollection {
+      title
+      slug {
+        current
+      }
+    }
+  }
+`;
+
+export async function getStaticProps() {
+  const { data } = await client.query({
+    query: ALL_COLLECTIONS_QUERY,
+  });
+
+  const collections = data.allCollection.map((collection) => ({
+    title: collection.title,
+    slug: collection.slug.current,
+  }));
+
+  return {
+    props: { collections },
+  };
+}
+
+export default function Collection({ collections }) {
   return (
     <Layout>
       <ul>
@@ -17,28 +44,4 @@ export default function Index({ collections }) {
       </ul>
     </Layout>
   );
-}
-
-export async function getStaticProps() {
-  const data = await getSanityContent({
-    query: `
-      query allCollections {
-        allCollection {
-          title
-          slug {
-            current
-          }
-        }
-      }
-    `,
-  });
-
-  const collections = data.allCollection.map((collection) => ({
-    title: collection.title,
-    slug: collection.slug.current,
-  }));
-
-  return {
-    props: { collections },
-  };
 }

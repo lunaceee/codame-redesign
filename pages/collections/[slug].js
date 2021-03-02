@@ -1,25 +1,53 @@
 import Layout from "../../components/Layout";
-import getSanityContent from "../../utils/sanity";
 import sanity from "../../client";
+import client from "../api/client";
+import gql from "graphql-tag";
 const BlockContent = require("@sanity/block-content-to-react");
 import serializers from "../../utils/serializers";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import Button from "../../components/Button";
 
-export async function getStaticPaths() {
-  const data = await getSanityContent({
-    query: `
-      query allCollections {
-         allCollection {
-              slug {
-                current
-              }
-          }
+export const ALL_COLLECTIONS_QUERY = gql`
+  query allCollections {
+    allCollection {
+      slug {
+        current
       }
-    `,
-  });
+    }
+  }
+`;
 
+export const COLLECTION_QUERY = gql`
+  query Collection($slug: String) {
+    allCollection(where: { slug: { current: { eq: $slug } } }) {
+      title
+      description
+      slug {
+        current
+      }
+      tags {
+        title
+      }
+      artworkShowcase {
+        caption
+        asset {
+          url
+        }
+      }
+      editorRaw
+      artists {
+        name
+        slug {
+          current
+        }
+      }
+    }
+  }
+`;
+
+export async function getStaticPaths() {
+  const { data } = await client.query({ query: ALL_COLLECTIONS_QUERY });
   return {
     paths: data.allCollection.map(
       (params) => `/collections/${params.slug.current}`
@@ -29,34 +57,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const data = await getSanityContent({
-    query: `
-    query Collection($slug: String) {
-      allCollection(where: {slug: {current: {eq: $slug}}}) {
-        title
-        description
-        slug{
-          current
-        }
-         tags {
-          title
-        }
-        artworkShowcase {
-          caption
-          asset {
-            url
-          }
-        }
-        editorRaw
-        artists {
-          name
-          slug {
-            current
-          }
-        }
-      }
-    }
-    `,
+  const { data } = await client.query({
+    query: COLLECTION_QUERY,
     variables: {
       slug: params.slug,
     },

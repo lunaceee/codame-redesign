@@ -1,9 +1,36 @@
 // index.js
 import Link from "next/link";
-import getSanityContent from "../../utils/sanity";
+import client from "../api/client";
+import gql from "graphql-tag";
 import Layout from "../../components/Layout";
 
-export default function Index({ posts }) {
+export const ALL_POSTS_QUERY = gql`
+  query allPosts {
+    allPost {
+      title
+      slug {
+        current
+      }
+    }
+  }
+`;
+
+export async function getStaticProps() {
+  const { data } = await client.query({
+    query: ALL_POSTS_QUERY,
+  });
+
+  const posts = data.allPost.map((post) => ({
+    title: post.title,
+    slug: post.slug.current,
+  }));
+
+  return {
+    props: { posts },
+  };
+}
+
+export default function Post({ posts }) {
   return (
     <Layout {...posts}>
       <ul>
@@ -17,29 +44,4 @@ export default function Index({ posts }) {
       </ul>
     </Layout>
   );
-}
-
-export async function getStaticProps() {
-  const data = await getSanityContent({
-    query: `
-      query allPosts {
-        allPost {
-          _id
-          title
-          slug {
-            current
-          }
-        }
-      }
-    `,
-  });
-
-  const posts = data.allPost.map((post) => ({
-    title: post.title,
-    slug: post.slug.current,
-  }));
-
-  return {
-    props: { posts },
-  };
 }

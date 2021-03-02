@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "sanity:start": "cd studio && sanity start"
+    "sanity": "cd studio && sanity start"
   },
   "keywords": [],
   "author": "lunaceee",

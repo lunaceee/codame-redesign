@@ -1,55 +1,56 @@
-import getSanityContent from "../../utils/sanity";
+import client from "../api/client";
+import gql from "graphql-tag";
 import Layout from "../../components/Layout";
 import sanity from "../../client";
 const BlockContent = require("@sanity/block-content-to-react");
 import serializers from "../../utils/serializers";
 
-export async function getStaticPaths() {
-  const data = await getSanityContent({
-    query: `
-      query allPosts {
-        allPost {
-          slug {
-            current
-          }
+export const ALL_POSTS_QUERY = gql`
+  query allPosts {
+    allPost {
+      slug {
+        current
+      }
+    }
+  }
+`;
+
+export const POST_QUERY = gql`
+  query Post($slug: String) {
+    allPost(where: { slug: { current: { eq: $slug } } }) {
+      title
+      author {
+        name
+      }
+      categories {
+        title
+      }
+      bodyRaw
+      publishedAt
+      mainImage {
+        asset {
+          url
         }
       }
-    `,
-  });
+      slug {
+        current
+      }
+    }
+  }
+`;
 
-  const posts = data.allPost;
+export async function getStaticPaths() {
+  const { data } = await client.query({ query: ALL_POSTS_QUERY });
 
   return {
-    paths: posts.map((p) => `/posts/${p.slug.current}`),
+    paths: data.allPost.map((p) => `/posts/${p.slug.current}`),
     fallback: false,
   };
 }
 
 export async function getStaticProps({ params }) {
-  const data = await getSanityContent({
-    query: `
-      query PostBySlug($slug: String) {
-        allPost(where: {slug: {current: {eq: $slug}}}){
-          title
-          author {
-            name
-          }
-          categories {
-            title
-          }
-          bodyRaw
-          publishedAt
-          mainImage {
-            asset {
-              url
-            }
-          }
-          slug {
-            current
-          }
-        }
-      }
-    `,
+  const { data } = await client.query({
+    query: POST_QUERY,
     variables: {
       slug: params.slug,
     },
