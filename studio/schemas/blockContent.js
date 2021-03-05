@@ -47,9 +47,51 @@ export default {
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
           {
-            title: "URL",
-            name: "link",
+            title: "External link",
+            name: "externalLink",
             type: "object",
+            blockEditor: {
+              icon: () => "EL",
+            },
+            fields: [
+              {
+                title: "External link",
+                name: "href",
+                type: "url",
+              },
+              {
+                title: "Open in new tab",
+                name: "blank",
+                description: "Read https://css-tricks.com/use-target_blank/",
+                type: "boolean",
+              },
+            ],
+          },
+          {
+            title: "Highlight",
+            name: "highlight",
+            type: "object",
+            fields: [{ name: "text", type: "string" }],
+          },
+          {
+            name: "internalLinkArticle",
+            type: "object",
+            title: "Internal Link to Article",
+            blockEditor: {
+              icon: () => "IA",
+            },
+            fields: [
+              {
+                name: "article",
+                type: "reference",
+                to: [{ type: "post" }],
+              },
+            ],
+          },
+          {
+            name: "button",
+            type: "object",
+            title: "CTA button",
             fields: [
               {
                 title: "URL",
@@ -57,8 +99,24 @@ export default {
                 type: "url",
               },
               {
-                title: "Open in new window",
+                title: "Open in new tab",
                 name: "blank",
+                description: "Read https://css-tricks.com/use-target_blank/",
+                type: "boolean",
+              },
+              {
+                title: "Center",
+                name: "center",
+                type: "boolean",
+              },
+              {
+                title: "Right",
+                name: "right",
+                type: "boolean",
+              },
+              {
+                title: "Left",
+                name: "left",
                 type: "boolean",
               },
             ],
@@ -66,11 +124,9 @@ export default {
         ],
       },
     },
-    // You can add additional types here. Note that you can't use
-    // primitive types such as 'string' and 'number' in the same array
-    // as a block type.
     {
-      type: "image",
+      title: "Article image",
+      type: "contentImage",
       options: { hotspot: true },
     },
   ],
