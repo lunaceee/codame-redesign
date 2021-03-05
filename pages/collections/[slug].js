@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import sanity from "../../client";
+import sanity from "../../utils/sanityClient";
 import client from "../api/client";
 import gql from "graphql-tag";
 const BlockContent = require("@sanity/block-content-to-react");

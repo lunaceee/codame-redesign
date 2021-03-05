@@ -1,7 +1,7 @@
 import client from "../api/client";
 import gql from "graphql-tag";
 import Layout from "../../components/Layout";
-import sanity from "../../client";
+import sanity from "../../utils/sanityClient";
 const BlockContent = require("@sanity/block-content-to-react");
 import serializers from "../../utils/serializers";
 
