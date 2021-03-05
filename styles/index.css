@@ -34,17 +34,13 @@
 }
 
 .content-editor {
-  @apply mt-10 px-4 max-w-2xl;
+  @apply mt-10 px-4 max-w-2xl mx-auto;
 
   & h1 {
     @apply text-center my-4;
   }
 
   & p {
-    @apply text-lg leading-7 my-4;
-  }
-
-  & a {
-    @apply text-secondary600;
+    @apply text-lg leading-7 my-4 grid;
   }
 }
