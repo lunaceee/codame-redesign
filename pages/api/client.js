@@ -9,6 +9,7 @@ const link = new HttpLink({
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
+  ssrMode: true,
   link,
   cache,
 });
