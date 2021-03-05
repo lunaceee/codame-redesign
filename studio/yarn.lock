@@ -1251,6 +1251,11 @@
   dependencies:
     "@sanity/client" "^1.149.13"
 
+"@sanity/image-url@^0.140.22":
+  version "0.140.22"
+  resolved "https://registry.yarnpkg.com/@sanity/image-url/-/image-url-0.140.22.tgz#7a65f56bb751f7b1c5dfacfadd34ee10fc4f0fde"
+  integrity sha512-CAmQZnj+KM7FSEYiWlIGDit072syicYuAw0w7R2ctMzHiZ4p9mE/g6dBnYqrqFUrw2J+GpJgPt+RVspKP8vdqA==
+
 "@sanity/imagetool@2.1.0":
   version "2.1.0"
   resolved "https://registry.npmjs.org/@sanity/imagetool/-/imagetool-2.1.0.tgz#4e9b188e3c21b4146bd9c0fbae5ec3ac7935b644"
@@ -7517,6 +7522,13 @@ sanity-plugin-markdown@^1.0.1:
     react-markdown "^4.0.2"
     textarea-editor "^2.1.1"
 
+sanity-plugin-position-input@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/sanity-plugin-position-input/-/sanity-plugin-position-input-1.0.4.tgz#805b5251e3e9019b91b76214782c9b205d9fe61b"
+  integrity sha512-bn5NQWVmO/J2ybMOES7jlij0QQT6gdf9LlEg1mwpVe3uLRgDgZlHa/EIIsnb4SFWAqjsC7dkVR1wbXjThiAncw==
+  dependencies:
+    styled-components "^5.0.1"
+
 sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -7981,7 +7993,7 @@ style-value-types@^3.1.9:
     hey-listen "^1.0.8"
     tslib "^1.10.0"
 
-styled-components@^5.0.0, styled-components@^5.2.1:
+styled-components@^5.0.0, styled-components@^5.0.1, styled-components@^5.2.1:
   version "5.2.1"
   resolved "https://registry.npmjs.org/styled-components/-/styled-components-5.2.1.tgz#6ed7fad2dc233825f64c719ffbdedd84ad79101a"
   dependencies:
