@@ -9,9 +9,22 @@ export default {
       type: "string",
     },
     {
-      name: "image",
-      title: "Image",
-      type: "string",
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: "title",
+        maxLength: 96,
+      },
+    },
+    {
+      name: "mainImage",
+      title: "Main image",
+      type: "contentImage",
+      options: {
+        hotspot: true,
+      },
     },
     {
       name: "description",
@@ -25,6 +38,17 @@ export default {
           lists: [],
         },
       ],
+    },
+    {
+      name: "categories",
+      title: "Categories",
+      type: "array",
+      of: [{ type: "reference", to: { type: "category" } }],
+    },
+    {
+      name: "body",
+      title: "Body",
+      type: "blockContent",
     },
   ],
 };

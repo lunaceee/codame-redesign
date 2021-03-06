@@ -26,6 +26,19 @@ export default {
       to: { type: "author" },
     },
     {
+      name: "description",
+      title: "Description",
+      type: "array",
+      of: [
+        {
+          title: "Block",
+          type: "block",
+          styles: [{ title: "Normal", value: "normal" }],
+          lists: [],
+        },
+      ],
+    },
+    {
       name: "mainImage",
       title: "Main image",
       type: "contentImage",
