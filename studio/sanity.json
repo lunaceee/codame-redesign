@@ -1,7 +1,8 @@
 {
   "root": true,
   "project": {
-    "name": "codame-redesign"
+    "name": "codame-redesign",
+    "basePath": "/studio"
   },
   "api": {
     "projectId": "p38n6r66",
@@ -18,9 +19,7 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [
