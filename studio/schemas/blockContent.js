@@ -1,13 +1,9 @@
-/**
- * This is the schema definition for the rich text fields used for
- * for this blog studio. When you import it in schemas.js it can be
- * reused in other parts of the studio with:
- *  {
- *    name: 'someName',
- *    title: 'Some title',
- *    type: 'blockContent'
- *  }
- */
+import {
+  CTAicon,
+  ExternalLinkIcon,
+  InternalLinkIcon,
+  HighlightIcon,
+} from "../static/Icons";
 
 export default {
   title: "Block Content",
@@ -51,7 +47,7 @@ export default {
             name: "externalLink",
             type: "object",
             blockEditor: {
-              icon: () => "EL",
+              icon: () => ExternalLinkIcon,
             },
             fields: [
               {
@@ -71,6 +67,9 @@ export default {
             title: "Highlight",
             name: "highlight",
             type: "object",
+            blockEditor: {
+              icon: () => HighlightIcon,
+            },
             fields: [{ name: "text", type: "string" }],
           },
           {
@@ -78,7 +77,7 @@ export default {
             type: "object",
             title: "Internal Link to Article",
             blockEditor: {
-              icon: () => "IA",
+              icon: () => InternalLinkIcon,
             },
             fields: [
               {
@@ -92,6 +91,9 @@ export default {
             name: "button",
             type: "object",
             title: "CTA button",
+            blockEditor: {
+              icon: () => CTAicon,
+            },
             fields: [
               {
                 title: "URL",
