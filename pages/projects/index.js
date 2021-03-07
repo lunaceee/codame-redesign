@@ -1,12 +1,11 @@
-// index.js
 import Link from "next/link";
 import client from "../api/client";
 import gql from "graphql-tag";
 import Layout from "../../components/Layout";
 
-export const ALL_POSTS_QUERY = gql`
-  query allPosts {
-    allPost {
+export const ALL_PROJECTS_QUERY = gql`
+  query allProjects {
+    allProject {
       title
       slug {
         current
@@ -17,26 +16,26 @@ export const ALL_POSTS_QUERY = gql`
 
 export async function getStaticProps() {
   const { data } = await client.query({
-    query: ALL_POSTS_QUERY,
+    query: ALL_PROJECTS_QUERY,
   });
 
-  const posts = data.allPost.map((post) => ({
-    title: post.title,
-    slug: post.slug.current,
+  const projects = data.allProject.map((project) => ({
+    title: project.title,
+    slug: project.slug.current,
   }));
 
   return {
-    props: { posts },
+    props: { projects },
   };
 }
 
-export default function Posts({ posts }) {
+export default function Projects({ projects }) {
   return (
-    <Layout {...posts}>
+    <Layout {...projects}>
       <ul>
-        {posts.map(({ title, slug }) => (
+        {projects.map(({ title, slug }) => (
           <li key={slug}>
-            <Link href={`/posts/${slug}`}>
+            <Link href={`/projects/${slug}`}>
               <a>{title}</a>
             </Link>
           </li>
