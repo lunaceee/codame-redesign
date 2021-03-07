@@ -28,6 +28,7 @@ export const PROJECT_QUERY = gql`
           url
           size
         }
+        alt
       }
       categories {
         title
@@ -67,9 +68,14 @@ const Project = (props) => {
   return (
     <Layout>
       <article>
-        <section>
+        <section className="grid justify-items-center">
           <h1>{project.title}</h1>
-          <img src={project.mainImage.asset.url} alt="main image" />
+          <div className="w-full lg:w-5/6 overflow-hidden my-4">
+            <img
+              src={project.mainImage.asset.url}
+              alt={project.mainImage.alt}
+            />
+          </div>
         </section>
         <BlockContent
           className="content-editor"

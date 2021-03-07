@@ -31,7 +31,7 @@ const serializers = {
     button: ({ children, mark }) => {
       const { blank, href, center, left, right } = mark;
       const btnClass = classNames({
-        "py-2 px-4 bg-primary600 rounded": true,
+        "py-2 px-4 my-2 bg-primary600 rounded lg:max-w-xs w-full justify-self-center": true,
         "justify-self-center": center,
         "justify-self-end": right,
         "justify-self-start": left,

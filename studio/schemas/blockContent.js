@@ -3,7 +3,7 @@ import {
   ExternalLinkIcon,
   InternalLinkIcon,
   HighlightIcon,
-} from "../static/Icons";
+} from "../../styles/Icons";
 
 export default {
   title: "Block Content",
