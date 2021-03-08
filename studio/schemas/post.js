@@ -42,9 +42,6 @@ export default {
       name: "mainImage",
       title: "Main image",
       type: "contentImage",
-      options: {
-        hotspot: true,
-      },
     },
     {
       name: "categories",

@@ -35,7 +35,7 @@ export default {
     {
       name: "profile",
       title: "Profile image",
-      type: "image",
+      type: "contentImage",
     },
     {
       name: "artistShowcase",

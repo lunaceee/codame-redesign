@@ -20,7 +20,7 @@ export default {
     },
     {
       name: "projectArtists",
-      title: "Artists",
+      title: "Featured artists",
       type: "array",
       of: [
         {

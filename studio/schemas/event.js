@@ -9,9 +9,14 @@ export default {
       type: "string",
     },
     {
-      name: "image",
-      title: "Image",
-      type: "string",
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: "title",
+        maxLength: 96,
+      },
     },
     {
       name: "description",
@@ -26,5 +31,47 @@ export default {
         },
       ],
     },
+    {
+      name: "mainImage",
+      title: "Main image",
+      type: "contentImage",
+    },
+    {
+      name: "eventArtists",
+      title: "Featured artists",
+      type: "featuredArtists"
+    },
+    {
+      name: "eventPartners",
+      title: "Event partners",
+      type: "partners"
+    },
+    {
+      name: "startDate",
+      title: "Start date",
+      type: "datetime"
+    },
+    {
+      name: "endDate",
+      title: "End date",
+      type: "datetime"
+    },
+    {
+      name: "buyButton",
+      title: "Buy button",
+      type: "button",
+    },
+    {
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [{ title: "Tag", type: "reference", to: { type: "category" } }],
+    },
+    {
+      name: "eventDetails",
+      title: "Event details",
+      type: "blockContent",
+    },
   ],
 };
+

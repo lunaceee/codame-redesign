@@ -16,6 +16,10 @@ import project from "./project";
 import collection from "./collection";
 import page from "./page";
 import gallery from "./gallery";
+import button from "./CTAbutton"
+import featuredArtists from "./featuredArtists"
+import partner from "./partner"
+import partners from "./partners"
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -39,5 +43,9 @@ export default createSchema({
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
     blockContent,
+    button,
+    featuredArtists,
+    partner,
+    partners
   ]),
 });
