@@ -5,7 +5,7 @@ import Footer from "./Footer";
 
 const Layout = (props) => {
   return (
-    <div className="bg-white dark:bg-gray-900">
+    <div>
       <NavBar />
       <Header {...props} />
       <Content {...props} />

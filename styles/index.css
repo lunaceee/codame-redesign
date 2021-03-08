@@ -21,7 +21,7 @@
 @layer base {
   body {
     font-family: "Asap", sans-serif;
-    @apply dark:text-gray-50;
+    @apply bg-gray-900 text-gray-50;
   }
 
   h1 {
