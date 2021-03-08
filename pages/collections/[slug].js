@@ -81,11 +81,8 @@ const Collection = (props) => {
   console.log(collection);
 
   return (
-    <Layout>
+    <Layout {...collection}>
       <article className="grid justify-items-center">
-        <section className="grid h-80 justify-items-center p-10 items-center">
-          <h1 className="p-4">{title}</h1>
-        </section>
         <div className="flex flex-col lg:flex-row lg:space-x-4 lg:mx-8">
           <div className="w-full md:max-w-2xl">
             <Carousel>

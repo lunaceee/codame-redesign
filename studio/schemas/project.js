@@ -19,6 +19,18 @@ export default {
       },
     },
     {
+      name: "projectArtists",
+      title: "Artists",
+      type: "array",
+      of: [
+        {
+          title: "Artist",
+          type: "reference",
+          to: [{ type: "artist" }],
+        },
+      ],
+    },
+    {
       name: "mainImage",
       title: "Main image",
       type: "contentImage",

@@ -72,18 +72,11 @@ export async function getStaticProps({ params }) {
 
 const Artist = (props) => {
   const artist = props.artist[0];
-  const imageUrl = artist.profile.asset.url;
-  const name = artist.name;
-  const slug = artist.slug.current;
 
   return (
-    <Layout>
+    <Layout {...artist}>
       <article className="grid justify-items-center">
-        <section className="grid h-80 justify-items-center p-10">
-          <h1 className="p-4">{name}</h1>
-          <div className="rounded-full w-20 h-20 relative overflow-hidden inline-block my-4 shadow-md">
-            <img src={imageUrl} alt={slug} className="h-full w-auto" />
-          </div>
+        <section className="grid justify-items-center p-10">
           <ArtistSocialIcons {...props} />
         </section>
         {artist.artistShowcase && (
