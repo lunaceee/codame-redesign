@@ -19,7 +19,7 @@
     "@apollo/react-ssr": "^4.0.0",
     "@headlessui/react": "^0.2.0",
     "@sanity/block-content-to-react": "2.0.7",
-    "@sanity/cli": "^2.3.8",
+    "@sanity/cli": "^2.6.0",
     "@sanity/client": "2.1.0",
     "@sanity/image-url": "0.140.19",
     "apollo-boost": "^0.4.9",
