@@ -1,5 +1,3 @@
-import gallery from "./gallery";
-
 export default {
   name: "artist",
   title: "Artist",
@@ -43,8 +41,8 @@ export default {
       type: "gallery",
     },
     {
-      name: "body",
-      title: "Body",
+      name: "artistDetails",
+      title: "Artist details",
       type: "blockContent",
     },
     {
