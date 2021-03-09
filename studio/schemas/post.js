@@ -55,8 +55,8 @@ export default {
       type: "datetime",
     },
     {
-      name: "body",
-      title: "Body",
+      name: "postDetails",
+      title: "Post details",
       type: "blockContent",
     },
   ],
