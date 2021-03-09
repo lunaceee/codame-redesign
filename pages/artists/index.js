@@ -1,6 +1,7 @@
-import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import client from "../api/client";
 import Layout from "../../components/Layout";
+import Link from "next/link";
 
 export const ALL_ARTISTS_QUERY = gql`
   query allArtists {
@@ -13,20 +14,32 @@ export const ALL_ARTISTS_QUERY = gql`
   }
 `;
 
-function ArtistIndex() {
-  const { loading, error, data } = useQuery(ALL_ARTISTS_QUERY);
-  if (error) return <h1>Error</h1>;
-  if (loading) return <h1>Loading...</h1>;
+export async function getStaticProps() {
+  const { data } = await client.query({
+    query: ALL_ARTISTS_QUERY,
+  });
+
+  const artists = data.allArtist.map((artists) => artists);
+
+  return {
+    props: { artists },
+  };
+}
+
+const Artists = (props) => {
   return (
     <Layout>
       <ul>
-        {data &&
-          data.allArtist.map((artist, index) => (
-            <li key={index}>{artist.name}</li>
-          ))}
+        {props.artists.map(({ name, slug }) => (
+          <li key={name}>
+            <Link href={`/artists/${slug}`}>
+              <a>{name}</a>
+            </Link>
+          </li>
+        ))}
       </ul>
     </Layout>
   );
-}
+};
 
-export default ArtistIndex;
+export default Artists;

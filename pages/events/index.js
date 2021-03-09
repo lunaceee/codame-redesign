@@ -4,9 +4,9 @@ import Layout from "../../components/Layout";
 import client from "../api/client";
 import gql from "graphql-tag";
 
-export const ALL_COLLECTIONS_QUERY = gql`
-  query allCollections {
-    allCollection {
+export const ALL_EVENTS_QUERY = gql`
+  query allEvents {
+    allEvent {
       title
       slug {
         current
@@ -17,26 +17,23 @@ export const ALL_COLLECTIONS_QUERY = gql`
 
 export async function getStaticProps() {
   const { data } = await client.query({
-    query: ALL_COLLECTIONS_QUERY,
+    query: ALL_EVENTS_QUERY,
   });
 
-  const collections = data.allCollection.map((collection) => ({
-    title: collection.title,
-    slug: collection.slug.current,
-  }));
+  const events = data.allEvent.map((events) => events);
 
   return {
-    props: { collections },
+    props: { events },
   };
 }
 
-export default function Collection({ collections }) {
+export default function Events(props) {
   return (
     <Layout>
       <ul>
-        {collections.map(({ title, slug }) => (
+        {props.events.map(({ title, slug }) => (
           <li key={slug}>
-            <Link href={`/posts/${slug}`}>
+            <Link href={`/events/${slug}`}>
               <a>{title}</a>
             </Link>
           </li>

@@ -45,7 +45,7 @@ export const PROJECT_QUERY = gql`
       categories {
         title
       }
-      bodyRaw
+      projectDetailsRaw
     }
   }
 `;
@@ -90,7 +90,7 @@ const Project = (props) => {
             />
             <BlockContent
               className="content-editor"
-              blocks={project.bodyRaw}
+              blocks={project.projectDetailsRaw}
               serializers={serializers}
               dataset={sanity.clientConfig.dataset}
               projectId={sanity.clientConfig.projectId}

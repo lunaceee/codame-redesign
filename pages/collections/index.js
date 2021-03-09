@@ -1,4 +1,3 @@
-// index.js
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import client from "../api/client";
@@ -34,13 +33,15 @@ export default function Collection({ collections }) {
   return (
     <Layout>
       <ul>
-        {collections.map(({ title, slug }) => (
-          <li key={slug}>
-            <Link href={`/posts/${slug}`}>
-              <a>{title}</a>
-            </Link>
-          </li>
-        ))}
+        {collections.map(({ title, slug }) => {
+          return (
+            <li key={slug}>
+              <Link href={`/posts/${slug}`}>
+                <a>{title}</a>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </Layout>
   );

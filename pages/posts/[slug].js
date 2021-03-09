@@ -25,7 +25,6 @@ export const POST_QUERY = gql`
       categories {
         title
       }
-      bodyRaw
       publishedAt
       mainImage {
         asset {
@@ -35,6 +34,7 @@ export const POST_QUERY = gql`
       slug {
         current
       }
+      postDetailsRaw
     }
   }
 `;
@@ -74,7 +74,7 @@ const Post = (props) => {
         </section>
         <BlockContent
           className="content-editor"
-          blocks={post.bodyRaw}
+          blocks={post.postDetailsRaw}
           serializers={serializers}
           dataset={sanity.clientConfig.dataset}
           projectId={sanity.clientConfig.projectId}

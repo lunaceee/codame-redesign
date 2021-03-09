@@ -42,7 +42,7 @@ export const ARTIST_QUERY = gql`
           url
         }
       }
-      bodyRaw
+      artistDetailsRaw
     }
   }
 `;
@@ -96,7 +96,7 @@ const Artist = (props) => {
 
         <BlockContent
           className="content-editor"
-          blocks={artist.bodyRaw}
+          blocks={artist.artistDetailsRaw}
           serializers={serializers}
           dataset={sanity.clientConfig.dataset}
           projectId={sanity.clientConfig.projectId}

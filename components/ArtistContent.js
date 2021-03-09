@@ -50,7 +50,7 @@ const ArtistContent = (props) => {
 
         <BlockContent
           className="artist-bio"
-          blocks={artist.bodyRaw}
+          blocks={artist.artistDetailsRaw}
           serializers={serializers}
           dataset={sanity.clientConfig.dataset}
           projectId={sanity.clientConfig.projectId}
