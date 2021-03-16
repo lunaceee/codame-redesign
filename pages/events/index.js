@@ -20,7 +20,10 @@ export async function getStaticProps() {
     query: ALL_EVENTS_QUERY,
   });
 
-  const events = data.allEvent.map((events) => events);
+  const events = data.allEvent.map((event) => ({
+    title: event.title,
+    slug: event.slug.current,
+  }));
 
   return {
     props: { events },

@@ -19,7 +19,10 @@ export async function getStaticProps() {
     query: ALL_PROJECTS_QUERY,
   });
 
-  const projects = data.allProject.map((projects) => projects);
+  const projects = data.allProject.map((project) => ({
+    title: project.title,
+    slug: project.slug.current,
+  }));
 
   return {
     props: { projects },
