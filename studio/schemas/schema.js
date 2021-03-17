@@ -5,21 +5,21 @@ import createSchema from "part:@sanity/base/schema-creator";
 import schemaTypes from "all:part:@sanity/base/schema-type";
 
 // We import object and document schemas
-import blockContent from "./blockContent";
-import category from "./category";
-import post from "./post";
-import contentImage from "./contentImage";
-import author from "./author";
-import artist from "./artist";
-import event from "./event";
-import project from "./project";
-import collection from "./collection";
-import page from "./page";
-import gallery from "./gallery";
-import button from "./CTAbutton"
-import featuredArtists from "./featuredArtists"
-import partner from "./partner"
-import partners from "./partners"
+import blockContent from "./objects/blockContent";
+import category from "./documents/category";
+import post from "./documents/post";
+import contentImage from "./objects/contentImage";
+import author from "./documents/author";
+import artist from "./documents/artist";
+import page from "./documents/page";
+import gallery from "./objects/gallery";
+import button from "./objects/CTAbutton";
+import partner from "./documents/partner";
+import sponsor from "./documents/sponsor";
+import event from "./documents/event";
+import project from "./documents/project";
+import collection from "./documents/collection";
+import contact from "./documents/contact";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -40,12 +40,12 @@ export default createSchema({
     event,
     project,
     collection,
+    partner,
+    sponsor,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
     blockContent,
     button,
-    featuredArtists,
-    partner,
-    partners
+    contact,
   ]),
 });

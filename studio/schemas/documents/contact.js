@@ -1,12 +1,13 @@
 export default {
-  name: "project",
-  title: "Project",
+  name: "contact",
+  title: "Contact",
   type: "document",
   fields: [
     {
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) => Rule.required().max(50),
     },
     {
       name: "slug",
@@ -16,26 +17,6 @@ export default {
       options: {
         source: "title",
         maxLength: 96,
-      },
-    },
-    {
-      name: "projectArtists",
-      title: "Featured artists",
-      type: "array",
-      of: [
-        {
-          title: "Artist",
-          type: "reference",
-          to: [{ type: "artist" }],
-        },
-      ],
-    },
-    {
-      name: "mainImage",
-      title: "Main image",
-      type: "contentImage",
-      options: {
-        hotspot: true,
       },
     },
     {
@@ -52,14 +33,19 @@ export default {
       ],
     },
     {
+      name: "mainImage",
+      title: "Main image",
+      type: "contentImage",
+    },
+    {
       name: "categories",
       title: "Categories",
       type: "array",
       of: [{ type: "reference", to: { type: "category" } }],
     },
     {
-      name: "projectDetails",
-      title: "Project details",
+      name: "contactDetails",
+      title: "Contact details",
       type: "blockContent",
     },
   ],

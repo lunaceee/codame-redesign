@@ -1,6 +1,3 @@
-import gallery from "./gallery";
-import blockContent from "./blockContent";
-
 export default {
   name: "collection",
   title: "Collection",
@@ -55,18 +52,10 @@ export default {
       type: "blockContent",
     },
     {
-      name: "artists",
+      name: "collectionArtists",
       title: "Artists",
       type: "array",
-      validation: (Rule) =>
-        Rule.unique().error("An artist can only appear once in this field"),
-      validation: (Rule) => Rule.required(),
-      of: [
-        {
-          type: "reference",
-          to: [{ type: "artist" }],
-        },
-      ],
+      of: [{ type: "reference", to: [{ type: "artist" }] }],
     },
   ],
 };

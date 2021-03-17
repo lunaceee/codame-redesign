@@ -38,23 +38,25 @@ export default {
     },
     {
       name: "eventArtists",
-      title: "Featured artists",
-      type: "featuredArtists"
+      title: "Event artists",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "artist" }] }],
     },
     {
       name: "eventPartners",
       title: "Event partners",
-      type: "partners"
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "partner" }] }],
     },
     {
       name: "startDate",
       title: "Start date",
-      type: "datetime"
+      type: "datetime",
     },
     {
       name: "endDate",
       title: "End date",
-      type: "datetime"
+      type: "datetime",
     },
     {
       name: "buyButton",
@@ -74,4 +76,3 @@ export default {
     },
   ],
 };
-
