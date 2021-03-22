@@ -23,8 +23,8 @@ export default {
         Rule.error("You have to fill out the alternative text.").required(),
       description: "Important for SEO and accessiblity.",
       options: {
-        isHighlighted: true,
         source: "caption",
+        isHighlighted: true,
       },
     },
   ],

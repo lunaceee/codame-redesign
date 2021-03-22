@@ -7,6 +7,8 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) =>
+        Rule.required().warning("Shorter titles are usually better").max(80),
     },
     {
       name: "slug",
@@ -21,6 +23,7 @@ export default {
     {
       name: "projectArtists",
       title: "Featured artists",
+      validation: (Rule) => Rule.required(),
       type: "array",
       of: [
         {
@@ -55,11 +58,12 @@ export default {
       name: "categories",
       title: "Categories",
       type: "array",
-      of: [{ type: "reference", to: { type: "category" } }],
+      of: [{ type: "reference", to: { type: "tag" } }],
     },
     {
       name: "projectDetails",
       title: "Project details",
+      validation: (Rule) => Rule.required(),
       type: "blockContent",
     },
     {

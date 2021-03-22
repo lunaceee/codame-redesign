@@ -7,7 +7,8 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required().max(50),
+      validation: (Rule) =>
+        Rule.required().warning("Shorter titles are usually better").max(80),
     },
     {
       name: "slug",
@@ -22,6 +23,7 @@ export default {
     {
       name: "author",
       title: "Author",
+      validation: (Rule) => Rule.required(),
       type: "reference",
       to: { type: "author" },
     },
@@ -42,22 +44,25 @@ export default {
       name: "mainImage",
       title: "Main image",
       type: "contentImage",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "categories",
       title: "Categories",
       type: "array",
-      of: [{ type: "reference", to: { type: "category" } }],
+      of: [{ type: "reference", to: { type: "tag" } }],
     },
     {
       name: "publishedAt",
       title: "Published at",
       type: "datetime",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "postDetails",
       title: "Post details",
       type: "blockContent",
+      validation: (Rule) => Rule.required(),
     },
   ],
 

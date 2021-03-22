@@ -1,6 +1,6 @@
 export default {
-  name: "category",
-  title: "Category",
+  name: "tag",
+  title: "Tag",
   type: "document",
   fields: [
     {
@@ -17,6 +17,7 @@ export default {
       validation: (Rule) => Rule.required(),
       options: {
         source: "title",
+        maxLength: 60,
       },
     },
     {

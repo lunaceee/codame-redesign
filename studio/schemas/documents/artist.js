@@ -16,7 +16,16 @@ export default {
       validation: (Rule) => Rule.required(),
       options: {
         source: "name",
+        maxLength: 96,
       },
+    },
+    {
+      name: "description",
+      title: "Description",
+      description: "Limited to 300 characters",
+      validation: (Rule) =>
+        Rule.warning("Description can't exceed 300 characters").max(300),
+      type: "text",
     },
     {
       name: "tags",
@@ -26,7 +35,7 @@ export default {
         {
           title: "Tag",
           type: "reference",
-          to: [{ type: "category" }],
+          to: [{ type: "tag" }],
         },
       ],
     },
@@ -34,6 +43,7 @@ export default {
       name: "profile",
       title: "Profile image",
       type: "contentImage",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "artistShowcase",
@@ -43,6 +53,7 @@ export default {
     {
       name: "artistDetails",
       title: "Artist details",
+      validation: (Rule) => Rule.required(),
       type: "blockContent",
     },
     {

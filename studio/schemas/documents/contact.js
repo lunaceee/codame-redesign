@@ -7,7 +7,8 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required().max(50),
+      validation: (Rule) =>
+        Rule.required().warning("Shorter titles are usually better").max(80),
     },
     {
       name: "slug",
@@ -22,6 +23,8 @@ export default {
     {
       name: "description",
       title: "Description",
+      validation: (Rule) =>
+        Rule.warning("Description can't exceed 500 characters").max(500),
       type: "array",
       of: [
         {
@@ -36,17 +39,19 @@ export default {
       name: "mainImage",
       title: "Main image",
       type: "contentImage",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "categories",
       title: "Categories",
       type: "array",
-      of: [{ type: "reference", to: { type: "category" } }],
+      of: [{ type: "reference", to: { type: "tag" } }],
     },
     {
       name: "contactDetails",
       title: "Contact details",
       type: "blockContent",
+      validation: (Rule) => Rule.required(),
     },
   ],
 };

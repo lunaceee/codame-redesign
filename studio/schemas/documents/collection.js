@@ -8,16 +8,17 @@ export default {
       title: "Title",
       type: "string",
       validation: (Rule) =>
-        Rule.required().warning("Shorter titles are usually better").max(50),
+        Rule.required().warning("Shorter titles are usually better").max(80),
     },
     {
       name: "slug",
       title: "Slug",
+      validation: (Rule) => Rule.required(),
       type: "slug",
       options: {
         source: "title",
+        maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
     },
     {
       name: "description",
@@ -28,6 +29,7 @@ export default {
       name: "thumbnail",
       title: "Thumbnail",
       type: "contentImage",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "tags",
@@ -37,7 +39,7 @@ export default {
         {
           title: "Tag",
           type: "reference",
-          to: [{ type: "category" }],
+          to: [{ type: "tag" }],
         },
       ],
     },
@@ -45,15 +47,18 @@ export default {
       name: "artworkShowcase",
       title: "Artwork showcase",
       type: "gallery",
+      validation: (Rule) => Rule.required(),
     },
     {
-      name: "editor",
-      title: "Editor",
+      name: "collectionDetails",
+      title: "Collection details",
+      validation: (Rule) => Rule.required(),
       type: "blockContent",
     },
     {
       name: "collectionArtists",
       title: "Artists",
+      validation: (Rule) => Rule.required(),
       type: "array",
       of: [{ type: "reference", to: [{ type: "artist" }] }],
     },

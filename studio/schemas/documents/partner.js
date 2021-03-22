@@ -16,17 +16,23 @@ export default {
       validation: (Rule) => Rule.required(),
       options: {
         source: "name",
+        maxLength: 96,
       },
     },
     {
-      name: "url",
-      title: "Url",
-      type: "url"
+      name: "partnerWebsite",
+      title: "Partner website",
+      type: "url",
     },
     {
       name: "partnerImage",
       title: "Partner image",
       type: "contentImage",
-    }
-  ]
-}
+    },
+    {
+      name: "partnerDetails",
+      title: "Partner Details",
+      type: "blockContent",
+    },
+  ],
+};

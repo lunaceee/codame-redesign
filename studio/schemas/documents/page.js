@@ -7,6 +7,8 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) =>
+        Rule.required().warning("Shorter titles are usually better").max(80),
     },
     {
       name: "description",
@@ -16,6 +18,7 @@ export default {
     {
       name: "slug",
       title: "Slug",
+      validation: (Rule) => Rule.required(),
       type: "slug",
       options: {
         source: "name",

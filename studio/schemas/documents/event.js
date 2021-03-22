@@ -7,6 +7,8 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) =>
+        Rule.required().warning("Shorter titles are usually better").max(80),
     },
     {
       name: "slug",
@@ -35,11 +37,13 @@ export default {
       name: "mainImage",
       title: "Main image",
       type: "contentImage",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "eventArtists",
       title: "Event artists",
       type: "array",
+      validation: (Rule) => Rule.required(),
       of: [{ type: "reference", to: [{ type: "artist" }] }],
     },
     {
@@ -51,11 +55,13 @@ export default {
     {
       name: "startDate",
       title: "Start date",
+      validation: (Rule) => Rule.required(),
       type: "datetime",
     },
     {
       name: "endDate",
       title: "End date",
+      validation: (Rule) => Rule.required(),
       type: "datetime",
     },
     {
@@ -67,12 +73,13 @@ export default {
       name: "tags",
       title: "Tags",
       type: "array",
-      of: [{ title: "Tag", type: "reference", to: { type: "category" } }],
+      of: [{ title: "Tag", type: "reference", to: { type: "tag" } }],
     },
     {
       name: "eventDetails",
       title: "Event details",
       type: "blockContent",
+      validation: (Rule) => Rule.required(),
     },
   ],
 };
