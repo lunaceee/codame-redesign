@@ -35,13 +35,20 @@ export const COLLECTION_QUERY = gql`
           url
         }
       }
-      editorRaw
-      artists {
+      collectionArtists {
         name
         slug {
           current
         }
+        profile {
+          asset {
+            url
+          }
+          caption
+          alt
+        }
       }
+      collectionDetailsRaw
     }
   }
 `;
@@ -73,12 +80,10 @@ export async function getStaticProps({ params }) {
 
 const Collection = (props) => {
   const collection = props.collection[0];
-  const featuredArtist = collection.artists;
-  const title = collection.title;
-  const description = collection.description;
+  const featuredArtists = collection.collectionArtists;
   const tags = collection.tags;
 
-  console.log(collection);
+  //console.log(collection);
 
   return (
     <Layout {...collection}>
@@ -161,9 +166,14 @@ const Collection = (props) => {
                 </li>
               </ul>
             </div>
+            <ul>
+              {featuredArtists.map((artist, index) => (
+                <li key={index}>{artist.name}</li>
+              ))}
+            </ul>
           </div>
 
-          <div className="">
+          <div>
             <div className="md:mb-4 md:ml-4">
               <Button size="lg" type="primary">
                 Get a quote
@@ -171,7 +181,7 @@ const Collection = (props) => {
             </div>
             <BlockContent
               className="content-editor"
-              blocks={collection.editorRaw}
+              blocks={collection.collectionDetailsRaw}
               serializers={serializers}
               dataset={sanity.clientConfig.dataset}
               projectId={sanity.clientConfig.projectId}

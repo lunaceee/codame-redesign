@@ -5,7 +5,7 @@ const Header = (props) => {
     imageUrl = profile.asset.url;
   }
 
-  console.log(props);
+  //console.log(props);
 
   return (
     <section className="grid h-80 justify-items-center p-10 items-center">

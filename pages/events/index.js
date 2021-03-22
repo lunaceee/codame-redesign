@@ -1,4 +1,3 @@
-// index.js
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import client from "../api/client";
@@ -32,7 +31,7 @@ export async function getStaticProps() {
 
 export default function Events(props) {
   return (
-    <Layout>
+    <Layout {...props}>
       <ul>
         {props.events.map(({ title, slug }) => (
           <li key={slug}>

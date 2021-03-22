@@ -1,7 +1,7 @@
 import client from "../api/client";
 import gql from "graphql-tag";
 import Layout from "../../components/Layout";
-import ArtistCard from "../../components/ArtistCard"
+import ArtistCard from "../../components/ArtistCard";
 import sanity from "../../utils/sanityClient";
 const BlockContent = require("@sanity/block-content-to-react");
 import serializers from "../../utils/serializers";
@@ -19,16 +19,17 @@ export const ALL_EVENTS_QUERY = gql`
 
 export const EVENT_QUERY = gql`
   query Event($slug: String) {
-    allEvent(where: { slug: { current: { eq: $slug } } }){
+    allEvent(where: { slug: { current: { eq: $slug } } }) {
       title
       slug {
         current
       }
+      descriptionRaw
       mainImage {
         asset {
           url
         }
-          alt
+        alt
         caption
       }
       eventArtists {
@@ -49,7 +50,7 @@ export const EVENT_QUERY = gql`
         slug {
           current
         }
-        url
+        partnerWebsite
         partnerImage {
           asset {
             url
@@ -57,6 +58,8 @@ export const EVENT_QUERY = gql`
           alt
         }
       }
+      startDate
+      endDate
       eventDetailsRaw
     }
   }
@@ -94,10 +97,7 @@ const Event = (props) => {
       <article>
         <section className="flex flex-col space-y-4 items-center">
           <section className="w-full lg:w-3/5 my-4">
-            <img
-              src={event.mainImage.asset.url}
-              alt={event.mainImage.alt}
-            />
+            <img src={event.mainImage.asset.url} alt={event.mainImage.alt} />
             <BlockContent
               className="content-editor"
               blocks={event.eventDetailsRaw}
@@ -110,10 +110,10 @@ const Event = (props) => {
             <h2 className="my-4">Featured artists</h2>
             <ul className="flex space-x-4">
               {event.eventArtists.map((eventArtist, index) => {
-                console.log({...eventArtist})
+                //console.log({ ...eventArtist });
                 return (
                   <li key={index}>
-                   <ArtistCard {...eventArtist} />
+                    <ArtistCard {...eventArtist} />
                   </li>
                 );
               })}

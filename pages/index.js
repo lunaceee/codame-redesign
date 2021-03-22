@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useQuery } from "@apollo/react-hooks";
+import client from "./api/client";
 import gql from "graphql-tag";
 import Layout from "../components/Layout";
 
@@ -14,21 +14,32 @@ export const ALL_PAGES_QUERY = gql`
   }
 `;
 
-export default function Home() {
-  const { loading, error, data } = useQuery(ALL_PAGES_QUERY);
-  if (error) return <h1>Error</h1>;
-  if (loading) return <h1>Loading...</h1>;
+export async function getStaticProps() {
+  const { data } = await client.query({
+    query: ALL_PAGES_QUERY,
+  });
+
+  const pages = data.allPage.map((page) => ({
+    title: page.title,
+    slug: page.slug.current,
+  }));
+
+  return {
+    props: { pages },
+  };
+}
+
+export default function Home({ pages }) {
   return (
-    <Layout>
+    <Layout {...pages}>
       <ul>
-        {data &&
-          data.allPage.map(({ title, slug }) => (
-            <li key={slug}>
-              <Link href={`/${slug}`}>
-                <a>{title}</a>
-              </Link>
-            </li>
-          ))}
+        {pages.map(({ title, slug }) => (
+          <li key={slug}>
+            <Link href={`/${slug}`}>
+              <a>{title}</a>
+            </Link>
+          </li>
+        ))}
       </ul>
     </Layout>
   );

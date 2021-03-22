@@ -77,7 +77,7 @@ export async function getStaticProps({ params }) {
 const Project = (props) => {
   const project = props.project[0];
 
-  console.log(project.projectArtists);
+  //console.log(project.projectArtists);
 
   return (
     <Layout {...project}>

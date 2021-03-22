@@ -3,9 +3,9 @@ import client from "../api/client";
 import gql from "graphql-tag";
 import Layout from "../../components/Layout";
 
-export const ALL_POSTS_QUERY = gql`
-  query allPosts {
-    allPost {
+export const ALL_CONTACT_TYPES_QUERY = gql`
+  query allContactTypes {
+    allContact {
       title
       slug {
         current
@@ -16,26 +16,27 @@ export const ALL_POSTS_QUERY = gql`
 
 export async function getStaticProps() {
   const { data } = await client.query({
-    query: ALL_POSTS_QUERY,
+    query: ALL_CONTACT_TYPES_QUERY,
   });
 
-  const posts = data.allPost.map((post) => ({
-    title: post.title,
-    slug: post.slug.current,
+  const allContactTypes = data.allContact.map((contact) => ({
+    title: contact.title,
+    slug: contact.slug.current,
   }));
 
   return {
-    props: { posts },
+    props: { allContactTypes },
   };
 }
 
-export default function Posts({ posts }) {
+export default function Contact(props) {
+  //console.log(props);
   return (
-    <Layout {...posts}>
+    <Layout {...props}>
       <ul>
-        {posts.map(({ title, slug }) => (
+        {props.allContactTypes.map(({ title, slug }) => (
           <li key={slug}>
-            <Link href={`/posts/${slug}`}>
+            <Link href={`/contact/${slug}`}>
               <a>{title}</a>
             </Link>
           </li>
